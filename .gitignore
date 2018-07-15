@@ -31,3 +31,6 @@
 
 # Ignore Spring files.
 /spring/*.pidps
+
+#igonore test picture
+/public/uploads
