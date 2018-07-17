@@ -8,6 +8,7 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
 
   def setup
     @user = users(:michael)
+    @archer = users(:archer)
   end
 
   test "profile display" do
@@ -22,5 +23,22 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
       assert_match micropost.content, response.body
     end
     #assert_select "a[href=?]", ’/’, count: 1
+    get user_path(@user)
+    assert_select 'strong#following',@user.active_relationships.count.to_s
+    assert_select 'strong#followers',@user.passive_relationships.count.to_s
+  end
+
+  test "home desplay stats" do
+    #following number should appear in home
+    log_in_as @user
+    get root_path
+    assert_select 'strong#following',@user.active_relationships.count.to_s
+    assert_select 'strong#followers',@user.passive_relationships.count.to_s
+    #assert_match "0 following", response.body
+    #assert_difference "@user.active_relationships.count" , 1 do
+      @user.follow @archer
+    #end
+    get root_path
+    assert_select 'strong#following',@user.active_relationships.count.to_s
   end
 end
