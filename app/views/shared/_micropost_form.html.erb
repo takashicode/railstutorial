@@ -1,6 +1,11 @@
 <%= form_for(@micropost) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
+
   <div class="field">
+    <% if params[:in_reply_to] %>
+      <%= "reply to #{User.find_by(id: params[:in_reply_to]).name}" %>
+      <%= f.hidden_field :in_reply_to, :value => params[:in_reply_to] %>
+    <% end %>
     <%= f.text_area :content, placeholder: "Compose new micropost..." %>
   </div>
   <%= f.submit "Post", class:"btn btn-primary" %>

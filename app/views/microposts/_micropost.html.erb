@@ -1,6 +1,12 @@
 <li id="micropost-<%= micropost.id %>">
   <%= link_to gravatar_for(micropost.user,size:50),   micropost.user %>
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
+  <% if micropost.in_reply_to? %>
+    <span class="reply">
+      <%= link_to "@#{replied(micropost).id}-#{replied(micropost).name}",
+                  replied(micropost) %>
+    </span>
+  <% end %>
   <span class="content">
     <%= micropost.content %>
     <%= image_tag micropost.picture.url if micropost.picture? %>       
@@ -9,6 +15,8 @@
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
     <% if current_user?(micropost.user) %>
       <%= link_to "delete",  micropost, method: :delete, data: {confirm: "You sure?"} %>
+    <% else %>
+      <%= link_to "@reply", root_url(in_reply_to: micropost.user.id) %>
     <% end %>
   </span>
 </li>

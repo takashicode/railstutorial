@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   has_many :microposts, dependent: :destroy
+  has_many :replied_microposts, class_name: "Micropost",
+                                foreign_key: "in_reply_to",
+                                dependent:   :destroy
   has_many :active_relationships, class_name:  "Relationship",
                                   foreign_key: "follower_id",
                                   dependent:   :destroy
@@ -72,7 +75,8 @@ class User < ApplicationRecord
   def feed
     following_ids = "SELECT followed_id FROM relationships
                      WHERE follower_id = :user_id"
-    Micropost.where("user_id IN (#{following_ids})
+    Micropost.where("(user_id IN (#{following_ids}) AND in_reply_to IS NULL)
+                     OR (user_id IN (#{following_ids}) AND in_reply_to = :user_id)
                      OR user_id = :user_id", user_id: id)
   end
 

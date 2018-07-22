@@ -12,6 +12,10 @@ module SessionsHelper
   def current_user?(user)
     user == current_user
   end
+#return replied user
+  def replied(micropost)
+    replied = User.find_by(id: micropost.in_reply_to)
+  end
 
   def current_user
     if (user_id = session[:user_id])
