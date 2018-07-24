@@ -15,6 +15,10 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
+  #resources :messages
+  get '/messages', to: 'messages#index'
+  get '/messages/:id', to: 'messages#show'
+  post '/messages/:id', to: 'messages#create'
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :microposts,          only: [:create, :destroy]

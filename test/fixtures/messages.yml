@@ -1,0 +1,7 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content:      "Test for Message"
+  sender_id:    1
+  recipient_id: 2
+

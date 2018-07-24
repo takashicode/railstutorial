@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_19_104459) do
+ActiveRecord::Schema.define(version: 2018_07_24_012124) do
+
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.integer "sender_id"
+    t.integer "recipient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sender_id", "recipient_id", "created_at"], name: "index_messages_on_sender_id_and_recipient_id_and_created_at"
+  end
 
   create_table "microposts", force: :cascade do |t|
     t.text "content"

@@ -1,5 +1,13 @@
 class User < ApplicationRecord
   has_many :microposts, dependent: :destroy
+
+  has_many :send_messages,    class_name:  "Message",
+                              foreign_key: "sender_id",
+                              dependent:   :destroy
+  has_many :receive_messages, class_name:  "Message",
+                              foreign_key:  "recipient_id",
+                              dependent:   :destroy
+
   has_many :replied_microposts, class_name: "Micropost",
                                 foreign_key: "in_reply_to",
                                 dependent:   :destroy
@@ -79,6 +87,22 @@ class User < ApplicationRecord
                      OR (user_id IN (#{following_ids}) AND in_reply_to = :user_id)
                      OR user_id = :user_id", user_id: id)
   end
+
+#return user who current_user sent or received message
+  def chat_with
+    chats =  Message.where(sender_id: self.id).map{|m| m.recipient_id}
+    chats += Message.where(recipient_id: self.id).map{|m| m.sender_id}
+    chats.uniq!
+    User.where(id: chats)
+  end
+
+#return messages current_user sent or received with other user
+  def messages_with(other_user_id)
+    Message.where("( sender_id = :user_id AND recipient_id = :other_id )
+                   OR ( recipient_id = :user_id AND sender_id = :other_id )",
+                   user_id: self.id, other_id: other_user_id)
+  end
+
 
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)

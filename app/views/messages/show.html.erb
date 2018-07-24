@@ -1,0 +1,5 @@
+<% provide(:title, 'Messages') %>
+<% @messages.each do |message|%>
+  <p><%= message.content %></p>
+<% end %>
+<h1>This is just a test for <%= params[:id] %> working</h1>
