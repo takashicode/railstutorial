@@ -283,3 +283,33 @@ span.picture{
     border: 0;
   }
 }
+
+
+.message{
+  list-style:none;
+  padding:0;
+  font-size: 1.1em;
+  line-height: 1.7em;
+
+  .message-sent {
+    position: relative;
+    background-color: #D9EDF7;
+    border-color: #BCE8F1;
+    margin: 5px 20px;
+    padding: 10px;
+    float: right;
+  }
+
+  .message-received {
+    position: relative;
+    background-color: #F1F0F0;
+    border-color: #EEEEEE;
+    margin: 5px 20px;
+    padding: 10px;
+    float: left;
+  }
+  .timestamp {
+    font-size: 0.4em;
+    color: $gray-light;
+  }
+}
