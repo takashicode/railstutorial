@@ -12,7 +12,22 @@ class MessagesController < ApplicationController
   end
 
   def create
+    Message.create(message_params)
+    @messages = current_user.messages_with(params[:id])
+    render 'show'
+    #@micropost = current_user.microposts.build(message_params)
+    #if @micropost.save
+      #flash[:success] = "Micropost created!"
+      #redirect_to root_url
+    #else
+      #@feed_items = []
+      #render 'static_pages/home'
+    #end
 
   end
 
+  private
+    def message_params
+      params.require(:message).permit(:sender_id, :recipient_id, :content)
+    end
 end

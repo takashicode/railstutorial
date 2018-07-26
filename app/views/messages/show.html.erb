@@ -2,3 +2,11 @@
 <% @messages.each do |message|%>
   <%= render message %>
 <% end %>
+
+
+  <%= form_for(:message, html: {class: 'form-inline'}) do |f| %>
+    <%= f.hidden_field :sender_id,    :value => current_user.id %>
+    <%= f.hidden_field :recipient_id, :value => params[:id] %>
+    <%= f.text_area :content, placeholder: "New message..." %>
+    <%= f.submit "Send", class:"btn btn-primary" %>
+  <% end %>

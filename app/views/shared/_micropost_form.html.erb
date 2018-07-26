@@ -1,6 +1,5 @@
 <%= form_for(@micropost) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-
   <div class="field">
     <% if params[:in_reply_to] %>
       <%= "reply to #{User.find_by(id: params[:in_reply_to]).name}" %>
