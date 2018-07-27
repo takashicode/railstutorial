@@ -285,7 +285,7 @@ span.picture{
 }
 
 
-.message{
+#message{
   list-style:none;
   padding:0;
   font-size: 1.1em;
@@ -309,7 +309,7 @@ span.picture{
     float: left;
   }
   .timestamp {
-    font-size: 0.4em;
+    font-size: 0.6em;
     color: $gray-light;
   }
 }

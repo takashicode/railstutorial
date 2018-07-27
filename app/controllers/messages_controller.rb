@@ -12,9 +12,13 @@ class MessagesController < ApplicationController
   end
 
   def create
-    Message.create(message_params)
+    @message = Message.create(message_params)
     @messages = current_user.messages_with(params[:id])
-    render 'show'
+    respond_to do |format|
+      format.html { render 'show' }
+      format.js
+    end
+
     #@micropost = current_user.microposts.build(message_params)
     #if @micropost.save
       #flash[:success] = "Micropost created!"

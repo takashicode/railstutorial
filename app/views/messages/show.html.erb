@@ -1,10 +1,12 @@
 <% provide(:title, 'Messages') %>
-<% @messages.each do |message|%>
-  <%= render message %>
-<% end %>
+  <div id="message">
+    <% @messages.each do |message|%>
+      <%= render message %>
+    <% end %>
+  </div>
 
-
-  <%= form_for(:message, html: {class: 'form-inline'}) do |f| %>
+<!-- ajax -->
+  <%= form_for(:message, html: {class: 'form-inline'}, remote: true) do |f| %>
     <%= f.hidden_field :sender_id,    :value => current_user.id %>
     <%= f.hidden_field :recipient_id, :value => params[:id] %>
     <%= f.text_area :content, placeholder: "New message..." %>
