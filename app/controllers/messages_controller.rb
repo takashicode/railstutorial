@@ -1,14 +1,16 @@
 class MessagesController < ApplicationController
+  before_action :logged_in_user
+
   def index
-    if current_user
-      @chats = current_user.chat_with.paginate(page: params[:page])
-    else
-      redirect_to root_path
-    end
+    @relate_users = current_user.following + current_user.followers
+    @chats = current_user.chat_with.paginate(page: params[:page])
   end
 
   def show
     @messages = current_user.messages_with(params[:id])
+    if @messages.nil?
+      @messages = []
+    end
   end
 
   def create

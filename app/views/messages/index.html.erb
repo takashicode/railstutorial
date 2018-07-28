@@ -2,6 +2,7 @@
 <% provide(:title, 'Messages') %>
 <h1><%= current_user.name %> chat with</h1>
 
+
 <ul class="users">
   <% @chats.each do |chat| %>
     <%= render partial: "chat", locals: {user: chat} %>
