@@ -1,7 +1,11 @@
-
 <% provide(:title, 'Messages') %>
-<h1><%= current_user.name %> chat with</h1>
 
+<select onchange="window.location=this.value"  class="form-control">
+  <option>Select User</option>
+  <% @relate_users.each do |r| %> 
+    <option value="users/<%= r.id %>/messages"><%= r.name %></option>
+  <% end %>
+</select>
 
 <ul class="users">
   <% @chats.each do |chat| %>

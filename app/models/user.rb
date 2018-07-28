@@ -92,7 +92,7 @@ class User < ApplicationRecord
   def chat_with
     chats =  Message.where(sender_id: self.id).map{|m| m.recipient_id}
     chats += Message.where(recipient_id: self.id).map{|m| m.sender_id}
-    chats.uniq!
+    chats.uniq!.delete(self.id)
     User.where(id: chats)
   end
 

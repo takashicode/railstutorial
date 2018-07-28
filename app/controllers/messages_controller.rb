@@ -20,16 +20,11 @@ class MessagesController < ApplicationController
       format.html { render 'show' }
       format.js
     end
+  end
 
-    #@micropost = current_user.microposts.build(message_params)
-    #if @micropost.save
-      #flash[:success] = "Micropost created!"
-      #redirect_to root_url
-    #else
-      #@feed_items = []
-      #render 'static_pages/home'
-    #end
-
+  def destroy
+    current_user.messages_with(params[:id]).destroy_all
+    redirect_to message_path
   end
 
   private

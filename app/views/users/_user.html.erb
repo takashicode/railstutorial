@@ -5,4 +5,7 @@
   | <%= link_to "delete", user, method: :delete,
                                 data: {confirm: "You sure?"} %>
   <% end %>
+  <% unless current_user == user %>
+  | <%= link_to "Send message", messages_user_path(user) %>
+  <% end %>
 </li>

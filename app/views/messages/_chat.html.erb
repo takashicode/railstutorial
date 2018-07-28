@@ -2,6 +2,7 @@
   <%= gravatar_for user, size: 50 %>
   <%= link_to user.name, user %>
   <% if !current_user?(user) %>
-  | <%= link_to "Send message" , "/messages/#{user.id}" %>
+  | <%= link_to "Send message" , messages_user_path(user) %>
+  | <%= link_to "Delete all message" , messages_user_path(user), method: :delete %>
   <% end %>
 </li>
