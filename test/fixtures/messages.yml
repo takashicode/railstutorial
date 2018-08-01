@@ -1,7 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  content:      "Test for Message"
+  content:      "Message from user-1 to user-2"
   sender_id:    1
   recipient_id: 2
+
+two:
+  content:      "Message from user-2 to user-1"
+  sender_id:    2
+  recipient_id: 1
+
 
