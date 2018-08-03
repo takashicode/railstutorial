@@ -24,4 +24,14 @@ class UserMailerTest < ActionMailer::TestCase
     assert_match CGI.escape(user.email), mail.body.encoded
   end
 
+  test "followed notice" do
+    user = users(:michael)
+    followed = users(:archer)
+    mail = UserMailer.followed_notice(user,followed)
+    assert_equal "新しいフォロワーの通知", mail.subject
+    assert_equal [followed.email], mail.to
+    assert_equal ["noreply@example.com"], mail.from
+    assert_match user.name, mail.body.encoded
+  end
+
 end
