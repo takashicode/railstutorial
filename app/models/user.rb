@@ -90,10 +90,13 @@ class User < ApplicationRecord
 
 #return user who current_user sent or received message
   def chat_with
-    chats =  Message.where(sender_id: self.id).map{|m| m.recipient_id}
-    chats += Message.where(recipient_id: self.id).map{|m| m.sender_id}
-    chats.uniq!.delete(self.id)
-    User.where(id: chats)
+    (send_messages.map(&:recipient) + receive_messages.map(&:sender)).uniq
+    # chats =  Message.where(sender_id: self.id).map(&:recipient_id)
+    # chats += Message.where(recipient_id: self.id).map(&:sender_id)
+    #if chats.any?
+      #chats.uniq!#.delete(self.id)
+    #User.where(id: chats)
+    #end
   end
 
 #return messages current_user sent or received with other user

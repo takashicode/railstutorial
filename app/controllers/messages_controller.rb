@@ -3,7 +3,11 @@ class MessagesController < ApplicationController
 
   def index
     @relate_users = current_user.following + current_user.followers
-    @chats = current_user.chat_with.paginate(page: params[:page])
+    if current_user.chat_with
+      @chats = current_user.chat_with#.paginate(page: params[:page])
+    else
+      @chats = []
+    end
   end
 
   def show

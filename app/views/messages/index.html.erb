@@ -9,6 +9,8 @@
 
 <ul class="users">
   <% @chats.each do |chat| %>
-    <%= render partial: "chat", locals: {user: chat} %>
+    <% #unless chat == current_user %>
+      <%= render partial: "chat", locals: {user: chat} %>
+    <% #end %>
   <% end %>
 </ul>

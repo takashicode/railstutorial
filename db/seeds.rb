@@ -14,10 +14,10 @@ User.create!(name: "Example User",
              activated: true,
              activated_at: Time.zone.now)
 
-User.create!(name: "takashi",
-             email: "takashi1@email.com",
-             password: "takashi",
-             password_confirmation: "takashi",
+User.create!(name: "guest",
+             email: "guest@email.com",
+             password: "guest",
+             password_confirmation: "guest",
              admin: false,
              activated: true,
              activated_at: 10.minutes.ago)
@@ -37,7 +37,11 @@ end
 users = User.order(:created_at).take(6)
 50.times do
   content = Faker::Lorem.sentence(5)
-  users.each {|user| user.microposts.create!(content: content)}
+  users.each do |user| 
+    user.microposts.create!(content: content)
+    Message.create!(sender_id: rand(7..11), recipient_id: rand(1..6), content: content)
+    Message.create!(sender_id: rand(1..6), recipient_id: rand(7..11), content: content)
+  end
 end
 
 users = User.all
@@ -46,3 +50,9 @@ following = users[2..50]
 followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
+
+# users = User.order(:created_at).take(6)
+# 50.times do
+#   content = Faker::Lorem.sentence(5)
+#   users.each {|user| Message.create!(sender_id: user.id, recipient_id: user.id + 1, content: content)}
+# end
