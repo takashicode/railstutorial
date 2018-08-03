@@ -16,8 +16,8 @@ User.create!(name: "Example User",
 
 User.create!(name: "guest",
              email: "guest@email.com",
-             password: "guest",
-             password_confirmation: "guest",
+             password: "password",
+             password_confirmation: "password",
              admin: false,
              activated: true,
              activated_at: 10.minutes.ago)
