@@ -15,4 +15,10 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.password_reset(user)
   end
 
+  def followed_notice
+    user = User.first
+    followed = User.second
+    UserMailer.followed_notice(user,followed).deliver_now
+  end
+
 end

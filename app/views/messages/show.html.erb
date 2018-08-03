@@ -9,6 +9,6 @@
   <%= form_for(:message, remote: true) do |f| %>
     <%= f.hidden_field :sender_id,    :value => current_user.id %>
     <%= f.hidden_field :recipient_id, :value => params[:id] %>
-    <%= f.text_area :content, placeholder: "New message..." %>
-    <%= f.submit "Send", class:"btn btn-primary" %>
+    <%= f.text_area :content, placeholder: "新しいメッセージ..." %>
+    <%= f.submit "送信", class:"btn btn-primary" %>
   <% end %>

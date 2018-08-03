@@ -1,7 +1,7 @@
 <% provide(:title, 'Messages') %>
 
 <select onchange="window.location=this.value"  class="form-control">
-  <option>Select User</option>
+  <option>フォロー中のユーザーにメッセージを送る</option>
   <% @relate_users.each do |r| %> 
     <option value="users/<%= r.id %>/messages"><%= r.name %></option>
   <% end %>

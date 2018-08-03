@@ -13,5 +13,10 @@
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, class:'form_control' %>
 
+      <%= f.label :followed_notice, class: "checkbox inline" do %>
+        <%= f.check_box :followed_notice ,checked_value: true %>
+        <span>フォロー通知を受け取る</span>
+      <% end %>
+
       <%= f.submit yield(:button_text), class: "btn btn-primary" %>
     <% end %>

@@ -76,6 +76,12 @@ class User < ApplicationRecord
     UserMailer.password_reset(self).deliver_now
   end
 
+#ユーザーがフォローされた際に通知メールを送る
+  def send_followed_notice_email(followed)
+    UserMailer.followed_notice(self,followed).deliver_now
+  end
+
+
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
   end
